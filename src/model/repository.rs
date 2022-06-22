@@ -39,7 +39,7 @@ impl Default for IndexingStatus {
 impl IndexingStatus {
     pub fn new(repository_id: String) -> Self {
         let mut status = Self::default();
-        status.repository_id = repository_id.clone();
+        status.repository_id = repository_id;
         status
     }
 }

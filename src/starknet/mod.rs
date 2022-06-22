@@ -51,7 +51,7 @@ impl AsyncLogger<pullrequest::PullRequest, ContractUpdateStatus> for API {
             pr.id, pr.author, pr.status
         );
 
-        let str_to_felt = |value: &String| cairo_short_string_to_felt(&value).unwrap();
+        let str_to_felt = |value: &String| cairo_short_string_to_felt(value).unwrap();
 
         self.account
             .execute(&[Call {

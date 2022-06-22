@@ -27,7 +27,7 @@ pub mod schema;
 pub fn establish_connection() -> Result<PgConnection> {
     dotenv().ok();
 
-    let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
+    let database_url = env::var("DATABASE_URL").map_err(|_| anyhow!("DATABASE_URL must be set"))?;
     PgConnection::establish(&database_url).map_err(|e| anyhow!(e))
 }
 

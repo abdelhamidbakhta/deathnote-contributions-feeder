@@ -1,9 +1,12 @@
-use crate::healthcheck::{
-    readiness::{Readiness, ReadinessDetails},
-    Status,
+use crate::{
+    database,
+    healthcheck::{
+        readiness::{Readiness, ReadinessDetails},
+        Status,
+    },
 };
-
 use anyhow::Result;
+use log::error;
 
 use once_cell::sync::Lazy;
 use std::sync::Arc;
@@ -62,7 +65,14 @@ impl DeathNoteReadiness {
     }
 
     fn healthcheck_db(&self) -> Status {
-        Status::Down
+        let db_connection_result = database::establish_connection();
+        match db_connection_result {
+            Ok(_) => Status::Up,
+            Err(e) => {
+                error!("Cannot connect to db: {}", e);
+                Status::Down
+            }
+        }
     }
     fn healthcheck_github(&self) -> Status {
         Status::Down
