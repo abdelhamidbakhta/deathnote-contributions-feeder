@@ -479,6 +479,7 @@ name = "deathnote_contributions_feeder"
 version = "0.0.1"
 dependencies = [
  "anyhow",
+ "arc-swap",
  "async-trait",
  "diesel",
  "dotenv",
@@ -487,6 +488,7 @@ dependencies = [
  "log",
  "mockall",
  "octocrab",
+ "once_cell",
  "rocket",
  "serde",
  "serde_json",
